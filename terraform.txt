@@ -141,3 +141,102 @@
 	2. Terraform Core
 	3. Provider plugins
 	4. Cloud APIs
+
+8. Important Concepts
+	✔ Declarative Approach
+	
+	You define what you want, not how to create it.
+	
+	✔ Idempotency
+	
+	Running the same code multiple times will not create duplicate resources.
+	
+	✔ Dependency Management
+	
+	Terraform automatically understands resource dependencies.
+
+ 9. Advanced Concepts
+	✔ count
+	
+	Create multiple resources.
+	
+	count = 2
+	✔ for_each
+	
+	Loop through values.
+	
+	✔ depends_on
+	
+	Control resource creation order.
+	
+	✔ Modules
+	
+	Reusable Terraform code blocks.
+	
+	✔ Provisioners
+	
+	Run scripts after resource creation.
+	
+	local-exec
+	remote-exec
+	✔ Backend
+	
+	Stores state remotely (example: AWS S3).
+
+ 10. Example: EC2 Creation
+	provider "aws" {
+	  region = "ap-south-1"
+	}
+	
+	data "aws_ami" "amazon_linux" {
+	  most_recent = true
+	  owners      = ["amazon"]
+	
+	  filter {
+	    name   = "name"
+	    values = ["amzn2-ami-hvm-*-x86_64-gp2"]
+	  }
+	}
+	
+	resource "aws_instance" "myec2" {
+	  ami           = data.aws_ami.amazon_linux.id
+	  instance_type = "t3.micro"
+	
+	  tags = {
+	    Name = "My-EC2"
+	  }
+	}
+
+ 11. Best Practices
+	Use variables instead of hardcoding
+	Use modules for reuse
+	Store state in remote backend
+	Use version control (Git)
+	Avoid committing terraform.tfstate
+
+ 12. Advantages
+	Faster deployment
+	Consistent infrastructure
+	Reduced manual errors
+	Scalable
+
+ 13. Limitations
+	Learning curve
+	State management complexity
+	Debugging can be difficult
+
+ 14. Terraform vs Other Tools
+	Tool	Purpose
+	Terraform	Infrastructure provisioning
+	Ansible	Configuration management
+	Shell Script	Task automation
+	AWS Lambda	Event-driven automation
+
+ 15. Real DevOps Workflow
+	Write Terraform code
+	Push to Git
+	Run via CI/CD pipeline
+	Deploy infrastructure automatically
+
+ 16. Conclusion
+	Terraform is a powerful tool for automating infrastructure using code. It helps organizations achieve consistency, scalability, and efficiency in managing cloud environments.
