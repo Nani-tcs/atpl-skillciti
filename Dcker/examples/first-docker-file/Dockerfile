@@ -1,5 +1,6 @@
-FROM ubuntu:latest
-WORKDIR /app
+FROM python:3.10
+
 COPY . /app
-RUN apt-get update && apt-get install -y
-CMD ["python3","app.py"]
+WORKDIR /app
+
+CMD ["python3", "app.py"]
